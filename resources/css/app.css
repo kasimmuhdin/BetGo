@@ -1,0 +1,189 @@
+@import "tailwindcss";
+
+/* ══════════════════════════════════════════════════════════════
+   GLOBAL STYLES — BetGo
+   ══════════════════════════════════════════════════════════════ */
+
+/* ─────────────── Dark-themed scrollbars ─────────────── */
+/* Firefox */
+* {
+    scrollbar-width: thin;
+    scrollbar-color: #3a3a3d #161414;
+}
+
+/* Chrome / Edge / Safari */
+*::-webkit-scrollbar {
+    width: 8px;
+    height: 10px;
+}
+
+*::-webkit-scrollbar-track {
+    background: #161414;
+    border-radius: 8px;
+}
+
+*::-webkit-scrollbar-thumb {
+    background-color: #3a3a3d;
+    border-radius: 8px;
+    border: 1px solid #161414;
+}
+
+*::-webkit-scrollbar-thumb:hover {
+    background-color: #52525b;
+}
+
+*::-webkit-scrollbar-corner {
+    background: #161414;
+}
+
+/* ─────────────── Autofill override (Chrome / Edge / Safari) ─────────────── */
+input:-webkit-autofill,
+input:-webkit-autofill:hover,
+input:-webkit-autofill:focus,
+input:-webkit-autofill:active {
+    -webkit-box-shadow: 0 0 0 30px #2a2a3c inset !important;
+    -webkit-text-fill-color: #ffffff !important;
+    caret-color: #ffffff !important;
+    transition: background-color 9999s ease-in-out 0s;
+    border-radius: 0.75rem;
+}
+
+input:-webkit-autofill:focus {
+    -webkit-box-shadow: 0 0 0 30px #2a2a3c inset !important;
+    border: none;
+}
+
+/* ─────────────── Autofill override (Firefox) ─────────────── */
+input:autofill {
+    filter: none;
+    background-color: #2a2a3c !important;
+    color: #ffffff !important;
+    border-radius: 0.75rem;
+}
+
+/* ─────────────── Optional: also fix textarea & select ─────────────── */
+textarea:-webkit-autofill,
+select:-webkit-autofill {
+    -webkit-box-shadow: 0 0 0 30px #2a2a3c inset !important;
+    -webkit-text-fill-color: #ffffff !important;
+    caret-color: #ffffff !important;
+    transition: background-color 9999s ease-in-out 0s;
+}
+
+[x-cloak] {
+    display: none !important;
+}
+
+/* ===== Markdown text (public pages, FAQ answers, admin preview) ===== */
+.md-body {
+    color: #cfd0d8;
+    font-size: 16px;
+    line-height: 1.75;
+    overflow-wrap: anywhere;
+}
+
+.md-body> :first-child {
+    margin-top: 0;
+}
+
+.md-body> :last-child {
+    margin-bottom: 0;
+}
+
+.md-body h1,
+.md-body h2,
+.md-body h3 {
+    color: #fff;
+    font-weight: 800;
+    letter-spacing: -.01em;
+    line-height: 1.25;
+}
+
+.md-body h1 {
+    font-size: 1.9rem;
+    margin: 2rem 0 .75rem;
+}
+
+.md-body h2 {
+    font-size: 1.4rem;
+    margin: 2.25rem 0 .75rem;
+}
+
+.md-body h3 {
+    font-size: 1.15rem;
+    margin: 1.75rem 0 .5rem;
+}
+
+.md-body p {
+    margin: 0 0 1rem;
+}
+
+.md-body ul,
+.md-body ol {
+    margin: 0 0 1rem;
+    padding-left: 1.5rem;
+}
+
+.md-body ul {
+    list-style: disc;
+}
+
+.md-body ol {
+    list-style: decimal;
+}
+
+.md-body li {
+    margin: .35rem 0;
+}
+
+.md-body a {
+    color: #00c8ff;
+    text-decoration: underline;
+    text-underline-offset: 3px;
+}
+
+.md-body strong {
+    color: #fff;
+    font-weight: 700;
+}
+
+.md-body blockquote {
+    margin: 0 0 1rem;
+    padding: .5rem 1rem;
+    border-left: 3px solid #00c8ff;
+    background: rgba(0, 200, 255, .06);
+    border-radius: 0 8px 8px 0;
+}
+
+.md-body hr {
+    border: 0;
+    border-top: 1px solid #2f2d30;
+    margin: 2rem 0;
+}
+
+.md-body code {
+    background: #161414;
+    border: 1px solid #2f2d30;
+    border-radius: 6px;
+    padding: .1rem .4rem;
+    font-size: .9em;
+}
+
+.md-body img {
+    max-width: 100%;
+    height: auto;
+    border-radius: 10px;
+}
+
+.md-body table {
+    width: 100%;
+    border-collapse: collapse;
+    margin-bottom: 1rem;
+}
+
+.md-body th,
+.md-body td {
+    border: 1px solid #2f2d30;
+    padding: .5rem .75rem;
+    text-align: left;
+}
