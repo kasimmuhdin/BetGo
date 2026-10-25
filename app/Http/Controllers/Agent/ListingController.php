@@ -28,6 +28,10 @@ class ListingController extends Controller
 
     public function create()
     {
+        if (!auth()->user()->hasListingCredit()) {
+            return redirect()->route('payments.pricing')
+                ->with('warning', 'Please finish payment before posting a new listing.');
+        }
         return view('agent.listings.create', [
             'listing' => new Property(['currency' => 'ETB', 'area_unit' => 'sqm']),
         ]);

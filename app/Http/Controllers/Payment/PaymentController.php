@@ -10,6 +10,7 @@ use App\Services\ChapaService;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Log;
 use Illuminate\Support\Str;
+use Laravel\Cashier\Cashier;
 
 class PaymentController extends Controller
 {
@@ -177,7 +178,7 @@ class PaymentController extends Controller
 
         $payment->update([
             'status' => 'success',
-            'subscription_id' => $grant->id,
+            'listing_grant_id' => $grant->id,
             'chapa_reference' => $result['data']['reference'] ?? null,
             'meta' => $result,
             'paid_at' => now(),
@@ -225,17 +226,33 @@ class PaymentController extends Controller
 
     public function stripeReturn(Request $request)
     {
-        $plan = Plan::where('key', $request->query('plan_key'))->firstOrFail();
+        $sessionId = $request->query('session_id');
+        abort_unless($sessionId, 404);
 
+        $user = $request->user();
 
-        $grant = $request->user()->listingGrants()
-            ->where('plan_id', $plan->id)
-            ->latest()
+        try {
+            $session = Cashier::stripe()->checkout->sessions->retrieve($sessionId);
+        } catch (\Throwable $e) {
+            Log::warning('Stripe return: could not retrieve session', [
+                'session_id' => $sessionId,
+                'message' => $e->getMessage(),
+            ]);
+            abort(404);
+        }
+
+        abort_unless($session->customer && $session->customer === $user->stripe_id, 403);
+
+        $payment = Payment::where('provider', 'stripe')
+            ->where('user_id', $user->id)
+            ->whereIn('tx_ref', array_filter([$session->id, $session->invoice]))
             ->first();
 
-        return view('payments.stripe-return', compact('plan', 'grant'));
+        return view('payments.return', [
+            'payment' => $payment,
+            'processing' => $payment === null,
+        ]);
     }
-
     protected function splitName(string $name): array
     {
         $parts = explode(' ', trim($name), 2);

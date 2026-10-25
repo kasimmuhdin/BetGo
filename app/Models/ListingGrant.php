@@ -10,8 +10,8 @@ class ListingGrant extends Model
         'user_id',
         'plan_id',
         'listings_used',
-        'starts_at',
-        'expires_at',
+        'start_at',
+        'expire_at',
         'status',
         'stripe_subscription_id',
     ];
