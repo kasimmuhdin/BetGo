@@ -88,7 +88,7 @@ class UserVerificationController extends Controller
         $user->notify(new UserVerificationReviewed($user));
 
         return redirect()
-            ->route('admin.users.index')
+            ->route('admin.users.all')
             ->with('success', "{$user->name} has been approved as " . ucfirst($user->role) . '.');
     }
 

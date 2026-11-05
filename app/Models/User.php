@@ -30,7 +30,7 @@ use Laravel\Sanctum\HasApiTokens;
     'is_active',
 ])]
 #[Hidden(['password', 'remember_token', 'google_id'])]
-class User extends Authenticatable implements MustVerifyEmail
+class User extends Authenticatable
 {
     /** @use HasFactory<UserFactory> */
     use HasFactory, Notifiable, Billable, HasApiTokens;
